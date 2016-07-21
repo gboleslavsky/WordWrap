@@ -1,12 +1,15 @@
 package FormatTextForScreen
 class WordWrap(t: String) {
+  //implementation that uses tail recursion directly, as opposed to using foldLeft, which is shorter.
   type Text = String
   type Word = String
   type Line = List[Word]
+
   def words(t: Text): List[Word] = t.split("\\s+").toList
   def lineLength(w: List[Word]): Int = w.size-1 + w.foldLeft(0)(_ + _.size)
 
   def lines(lineWidth: Int): List[Line] = {
+    //main algorithm
     def linesRec(found: List[Line], remaining: List[Word]): List[Line] = {
       if(remaining.size == 0) return found
       val newLine = nextLine(remaining, lineWidth)
@@ -17,6 +20,7 @@ class WordWrap(t: String) {
   }
 
   def nextLine(t: List[Word], lineWidth: Int): Line= {
+    //helper function that return next line <= lineWidth
     def nextLineRec(line: List[Word], t: List[Word]): Line = {
       if (lineLength(line) > lineWidth) return if (line.size==1) line else line.dropRight(1)
       if( t.size == 0) return line
@@ -34,6 +38,8 @@ object WordWrap{
 }
 
 object Test extends App{
+  //I used code below to compare my solution to the one at:
+  //https://www.rosettacode.org/wiki/Word_wrap#Scala
   def printListLine(l: List[String]): Unit = println((l mkString " ") drop 1)
 
   val txtAsLines =
