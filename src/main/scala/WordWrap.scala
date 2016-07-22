@@ -40,7 +40,6 @@ object WordWrap{
 object Test extends App{
   //I used code below to compare my solution to the one at:
   //https://www.rosettacode.org/wiki/Word_wrap#Scala
-  def printListLine(l: List[String]): Unit = println((l mkString " ") drop 1)
 
   val txtAsLines =
     WordWrap("Vijftig jaar geleden publiceerde Edsger Dijkstra zijn kortstepadalgoritme. Daarom een kleine ode" +
@@ -57,6 +56,8 @@ object Test extends App{
       " manier kunt bereiken, schrijf je de nieuwe, kortere afstand tot het beginpunt bij zo’n punt. Zo ga je steeds een" +
       " stukje verder tot je alle punten hebt gehad en je de kortste route tot het eindpunt hebt gevonden.")
       .lines(120)
+
+  def printListLine(l: List[String]): Unit = println((l mkString " ") drop 1)
 
   txtAsLines foreach printListLine
 }
